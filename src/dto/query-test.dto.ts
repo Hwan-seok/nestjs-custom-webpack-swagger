@@ -1,13 +1,20 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
-import { UserRole } from '../enum/user-role.enum';
+import { IsNumber } from "class-validator";
+import { Type } from "class-transformer";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class QueryTest {
-  @IsEnum(UserRole)
-  userRole: UserRole;
+  @IsNumber()
+  @Type(() => Number)
+  @ApiProperty({ default: 0 })
+  numberPropertyDefaultIsZeroNumber: number;
 
   @IsNumber()
-  numberProperty: number;
+  @Type(() => Number)
+  @ApiProperty({ default: "0" })
+  numberPropertyDefaultIsZeroString: number;
 
-  @IsString()
-  stringProperty: string;
+  @IsNumber()
+  @Type(() => Number)
+  @ApiProperty({ default: 10 })
+  numberPropertyDefaultIsNonZero: number;
 }
